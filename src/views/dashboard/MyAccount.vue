@@ -1,4 +1,4 @@
-c<template>
+<template>
   <div class="myaccount">
     <div class="hero is-link is-medium">
       <div class="hero-body has-text-centered">

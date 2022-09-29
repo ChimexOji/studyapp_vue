@@ -25,7 +25,7 @@
 
                     <div class="column is-10">
                         <div class="columns is-multiline">
-                            <div class="column is-4">
+                            <div class="column is-4" v-for="course in courses" v-bind:key="course.id">
                                 <div class="card">
                                     <div class="card-image">
                                         <figure class="image is-4by3">
@@ -36,91 +36,20 @@
                                     <div class="card-content">
                                         <div class="media">
                                             <div class="media-content">
-                                                <p class="is-size-5">Build a social media network</p>
+                                                <p class="is-size-5">{{ course.title }}</p>
                                             </div>
                                         </div>
 
                                         <div class="content">
-                                            <p>Learn the basics...</p>
+                                            <p>{{ course.short_description }}</p>
 
-                                            <a href="#">More</a>
+                                            <router-link :to="{name: 'Course', params: {slug: course.slug}}">More</router-link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="column is-4">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <figure class="image is-4by3">
-                                            <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                        </figure>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="is-size-5">Build a social media network</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            <p>Learn the basics...</p>
-
-                                            <a href="#">More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="column is-4">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <figure class="image is-4by3">
-                                            <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                        </figure>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="is-size-5">Build a social media network</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            <p>Learn the basics...</p>
-
-                                            <a href="#">More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="column is-4">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <figure class="image is-4by3">
-                                            <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                        </figure>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="is-size-5">Build a social media network</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            <p>Learn the basics...</p>
-
-                                            <a href="#">More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            
 
                         <div class="column is-12">
                             <nav class="pagination">
@@ -137,6 +66,31 @@
                     </div>
                 </div>
             </div>
+        </div>
         </section>
     </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+    data() {
+       return {
+        courses: []
+       } 
+    },
+    // vue life cycle hook to display courses backend components
+    mounted() {
+        console.log('mounted')
+
+        axios
+            .get('/api/v1/courses/')
+            .then(response => {
+                console.log(response.data)
+
+                this.courses = response.data
+            })
+    }
+}
+</script>
