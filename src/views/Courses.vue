@@ -26,27 +26,8 @@
                     <div class="column is-10">
                         <div class="columns is-multiline">
                             <div class="column is-4" v-for="course in courses" v-bind:key="course.id">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <figure class="image is-4by3">
-                                            <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                        </figure>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="is-size-5">{{ course.title }}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="content">
-                                            <p>{{ course.short_description }}</p>
-
-                                            <router-link :to="{name: 'Course', params: {slug: course.slug}}">More</router-link>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--Course item component-->
+                                <CourseItem :course="course"/>
                             </div>
 
                             
@@ -74,11 +55,16 @@
 <script>
 import axios from 'axios'
 
+import CourseItem from '@/components/CourseItem.vue'
+
 export default {
     data() {
        return {
         courses: []
        } 
+    },
+    components: {
+        CourseItem
     },
     // vue life cycle hook to display courses backend components
     mounted() {
