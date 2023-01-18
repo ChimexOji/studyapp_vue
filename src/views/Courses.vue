@@ -15,7 +15,7 @@
 
                             <ul class="menu-list">
                                <li>
-                                    <a 
+                                    <a
                                         v-bind:class="{'is-active': !activeCategory}"
                                         @click="setActivCategory(null)"
                                     >
@@ -36,7 +36,7 @@
                                 <CourseItem :course="course"/>
                             </div>
 
-                            
+
 
                         <div class="column is-12">
                             <nav class="pagination">
@@ -70,7 +70,7 @@ export default {
         courses: [],
         categories: [],
         activeCategory: null
-       } 
+       }
     },
     components: {
         CourseItem
@@ -78,6 +78,8 @@ export default {
     // vue life cycle hook to display courses backend components
     async mounted() {
         console.log('mounted')
+
+        document.title = 'Courses | StudyApp'
 
         await axios
             .get('/api/v1/courses/get_categories/')

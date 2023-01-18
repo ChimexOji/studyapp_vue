@@ -60,6 +60,10 @@ export default {
       errors: []
     }
   },
+  mounted() {
+    document.title = 'Login | StudyApp'
+  },
+
   methods: {
     submitForm() {
       console.log('submitForm')

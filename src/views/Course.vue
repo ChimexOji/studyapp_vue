@@ -37,7 +37,7 @@
                                                 <br>
                                                 {{ comment.content }}<br>
                                                 <time>{{ comment.created_at }}</time>
-                                                
+
                                             </p>
                                         </div>
                                     </div>
@@ -72,11 +72,11 @@
 
                             <template v-else>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Ratione alias voluptates quos itaque ipsum vero, 
-                                    natus omnis minus unde ab dolor, 
-                                    tempore quia accusantium quam eius laborum repellat 
-                                    inventore pariatur numquam mollitia quaerat. 
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Ratione alias voluptates quos itaque ipsum vero,
+                                    natus omnis minus unde ab dolor,
+                                    tempore quia accusantium quam eius laborum repellat
+                                    inventore pariatur numquam mollitia quaerat.
                                     In dolores provident quasi perferendis iste distinctio.
                                 </p>
                             </template>
@@ -96,7 +96,7 @@
 
 <script>
     import axios from 'axios'
-    
+
     export default {
         data() {
            return {
@@ -109,22 +109,24 @@
                     name : '',
                     content: ''
                 }
-           } 
+           }
         },
         // vue life cycle hook to display courses backend components
-        mounted() {
+        async mounted() {
             console.log('mounted')
 
             const slug = this.$route.params.slug
-    
-            axios
+
+            await axios
                 .get(`/api/v1/courses/${slug}/`)
                 .then(response => {
                     console.log(response.data)
-    
+
                     this.course = response.data.course
                     this.lessons = response.data.lessons
                 })
+
+            document.title = this.course.title + ' | StudyApp'
         },
         methods: {
             submitComment() {
